@@ -1,3 +1,4 @@
+/* Main container for the users page */
 .container {
   display: flex;
   flex-direction: column;
@@ -7,6 +8,7 @@
   padding: 20px;
 }
 
+/* Styles for the header section */
 .header {
   display: flex;
   justify-content: space-between;
@@ -18,17 +20,20 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
+/* Header title */
 .header h1 {
   font-size: 26px;
   margin: 0;
 }
 
+/* Header paragraph text */
 .header p {
   font-size: 16px;
   opacity: 0.9;
   margin: 4px 0 0;
 }
 
+/* Logout button */
 .logoutButton {
   background-color: #ff4d4f;
   border: none;
@@ -38,10 +43,12 @@
   transition: background 0.3s;
 }
 
+/* Logout button hover state */
 .logoutButton:hover {
   background-color: #d9363e;
 }
 
+/* Filter controls container */
 .filterControls {
   background-color: #ffffff;
   padding: 20px;
@@ -50,29 +57,34 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+/* Filter input group (label + input) */
 .filterInputGroup {
   margin-bottom: 12px;
   display: flex;
   flex-direction: column;
 }
 
+/* Filter labels */
 .filterInputGroup label {
   font-weight: 600;
   margin-bottom: 4px;
 }
 
+/* Filter input fields */
 .filterInputGroup input {
   padding: 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
 }
 
+/* Filter action buttons container */
 .filterButtons {
   display: flex;
   gap: 10px;
   margin-top: 10px;
 }
 
+/* Common styles for filter buttons */
 .applyButton,
 .clearButton {
   padding: 8px 14px;
@@ -82,24 +94,29 @@
   font-weight: 600;
 }
 
+/* Apply Filters button */
 .applyButton {
   background-color: #4caf50;
   color: white;
 }
 
+/* Apply Filters button hover state */
 .applyButton:hover {
   background-color: #388e3c;
 }
 
+/* Clear Filters button */
 .clearButton {
   background-color: #757575;
   color: white;
 }
 
+/* Clear Filters button hover state */
 .clearButton:hover {
   background-color: #616161;
 }
 
+/* Main content area */
 .content {
   flex: 1;
   background-color: #ffffff;
@@ -108,6 +125,7 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
 }
 
+/* User list grid */
 .userList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -117,6 +135,7 @@
   list-style: none;
 }
 
+/* Individual user item */
 .userItem {
   background-color: #fafafa;
   border: 1px solid #e0e0e0;
@@ -125,16 +144,19 @@
   transition: box-shadow 0.3s ease;
 }
 
+/* User item hover state */
 .userItem:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
 }
 
+/* User item paragraph text */
 .userItem p {
   margin: 8px 0;
   color: #333;
   font-size: 15px;
 }
 
+/* User photo wrapper */
 .photoWrapper {
   width: 100%;
   height: 220px;
@@ -144,6 +166,7 @@
   margin-bottom: 16px;
 }
 
+/* User photo image */
 .userPhoto {
   width: 100%;
   height: 100%;
@@ -151,19 +174,23 @@
   display: block;
 }
 
+/* User details container */
 .userDetails {
   padding: 0;
 }
 
+/* Email section */
 .emailSection {
   margin-top: 12px;
 }
 
+/* Email display text */
 .emailDisplay {
   font-size: 14px;
   color: #444;
 }
 
+/* Email toggle button */
 .toggleButton {
   margin-top: 8px;
   padding: 6px 14px;
@@ -176,10 +203,12 @@
   transition: background 0.3s ease;
 }
 
+/* Email toggle button hover state */
 .toggleButton:hover {
   background-color: #155ecf;
 }
 
+/* Error message style */
 .error {
   color: #d32f2f;
   font-weight: 600;
@@ -189,6 +218,7 @@
   border-radius: 6px;
 }
 
+/* Footer section */
 .footer {
   margin-top: 40px;
   text-align: center;
