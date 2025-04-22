@@ -31,40 +31,53 @@ const UsersPage = () => {
   // Function to fetch billing records from the backend API
   // useCallback prevents this function from being recreated on every render unless dependencies change
   const fetchUsers = useCallback(async (filters = {}) => {
-    setLoading(true); // Set loading state to true
-    setError(null); // Clear any previous errors
+    setLoading(true);
+    setError(null);
+
+    // Get token
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      setError('Authentication token not found. Please log in again.');
+      setLoading(false);
+      return; // Stop fetching if no token
+    }
 
     try {
-      // Build query parameters based on the provided filters
       const params = new URLSearchParams();
       if (filters.productCode) params.append('product_code', filters.productCode);
       if (filters.location) params.append('location', filters.location);
 
-      // Construct the final request URL with query parameters if they exist
       const query = params.toString();
       const requestUrl = query ? `${backendApiUrl}?${query}` : backendApiUrl;
 
-      // Make the GET request using axios
-      const response = await axios.get(requestUrl);
-      // Update the users state with the fetched data
+      // Add Authorization header to axios request
+      const response = await axios.get(requestUrl, {
+        headers: {
+          'Authorization': `Bearer ${token}` // Include the app token
+        }
+      });
+
       setUsers(response.data);
     } catch (err) {
-      // Handle errors during the fetch operation
-      setError(err.response?.data?.message || err.message || 'Failed to fetch billing records');
-      setUsers([]); // Clear users data on error
+      // Handle errors from backend
+      if (err.response?.status === 401 || err.response?.status === 403) {
+        setError('Unauthorized or session expired. Please log in again.');
+      } else {
+        setError(err.response?.data?.message || err.message || 'Failed to fetch billing records');
+      }
+      setUsers([]);
     } finally {
-      // Ensure loading state is set to false regardless of success or error
       setLoading(false);
     }
   }, [backendApiUrl]);
 
   // Effect hook to handle initial data fetching and authentication checks
   useEffect(() => {
-    // If the user is not authenticated, redirect to the login page
+    // Redirect to the login page if the user is not authenticated
     if (!isAuthenticated) {
       router.push('/');
     } else {
-      // If authenticated, fetch the initial list of users
+      // Fetch the initial list of users if authenticated
       fetchUsers();
     }
   }, [isAuthenticated, router, fetchUsers]);
@@ -146,7 +159,7 @@ const Header = ({ user, onLogout }) => (
       {user?.name && <p style={{ margin: 0 }}>{user.name}</p>} {/* Display name if available */}
       <button onClick={onLogout} className={styles.logoutButton}>
         {/* Logout icon */}
-        <img src="/logout.png" alt="Logout" style={{width: '20px', height:'20px'}} className={styles.logoutIcon} />
+        <img src="/logout.png" alt="Logout" style={{ width: '20px', height: '20px' }} className={styles.logoutIcon} />
       </button>
     </div>
   </header>

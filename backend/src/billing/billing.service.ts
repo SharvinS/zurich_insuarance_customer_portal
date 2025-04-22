@@ -138,7 +138,9 @@ export class BillingService {
     );
     try {
       // Attempt to delete the record directly using the product_code
-      const deleteResult = await this.billingRepository.delete({ product_code });
+      const deleteResult = await this.billingRepository.delete({
+        product_code,
+      });
 
       // Check if any rows were actually affected
       if (deleteResult.affected === 0) {

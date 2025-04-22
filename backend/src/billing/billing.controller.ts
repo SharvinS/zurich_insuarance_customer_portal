@@ -18,12 +18,14 @@ import {
   ApiTags,
   ApiQuery,
   ApiUnauthorizedResponse,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { BillingRecord } from './billing-record.entity';
 import { RolesGuard } from '../guards/roles.guard';
 import { Roles } from '../decorators/roles.decorator';
 
 // Sets up the routes for handling billing-related requests
+@ApiBearerAuth('Authorization')
 @ApiTags('Billing') // Groups these endpoints under 'Billing' in Swagger UI
 @Controller('billing') // Base path for all routes in this controller is /billing
 export class BillingController {
@@ -46,6 +48,7 @@ export class BillingController {
   @Post()
   @Roles('admin') // Restricts this endpoint to users with the 'admin' role
   @UseGuards(RolesGuard) // Applies the RolesGuard to enforce the role check
+  @ApiBearerAuth() // Indicates that this endpoint requires authentication
   @ApiCreatedResponse({
     type: BillingRecord, // Tells Swagger the expected response type on successful creation
     description: 'Billing record created successfully',
@@ -60,6 +63,7 @@ export class BillingController {
   @Put()
   @Roles('admin') // Restricts to 'admin' role
   @UseGuards(RolesGuard) // Enforces role check
+  @ApiBearerAuth() // Indicates that this endpoint requires authentication
   @ApiOkResponse({
     type: BillingRecord, // Tells Swagger the expected response type on successful update
     description: 'Billing record updated successfully',
@@ -83,6 +87,7 @@ export class BillingController {
   @Delete()
   @Roles('admin') // Restricts to 'admin' role
   @UseGuards(RolesGuard) // Enforces role check
+  @ApiBearerAuth() // Indicates that this endpoint requires authentication
   @ApiOkResponse({ description: 'Billing record deleted successfully' }) // Describes the successful deletion response
   @ApiUnauthorizedResponse({ description: 'Unauthorized access' }) // Documents potential auth error
   @ApiQuery({

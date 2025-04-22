@@ -10,7 +10,7 @@ const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 function MyApp({ Component, pageProps }) {
   // Make sure the Google Client ID is actually set
   if (!clientId) {
-    console.error("Fatal Error: NEXT_PUBLIC_GOOGLE_CLIENT_ID is not defined in environment variables");
+    console.error("Error: NEXT_PUBLIC_GOOGLE_CLIENT_ID is not defined in environment variables");
   }
 
   // Render the application structure

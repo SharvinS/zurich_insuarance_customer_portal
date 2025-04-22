@@ -4,14 +4,13 @@ import { BillingService } from './billing.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BillingRecord } from './billing-record.entity';
 import { AuthMiddleware } from '../middleware/auth.middleware';
+import { ConfigModule } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
 
 // Defines the Billing module annd bundling related components like controllers and services
 @Module({
   // Imports other modules needed
-  imports: [
-    // Set up TypeORM integration for  BillingRecord making it available for injection
-    TypeOrmModule.forFeature([BillingRecord]),
-  ],
+  imports: [TypeOrmModule.forFeature([BillingRecord]), JwtModule, ConfigModule],
   // List the controllers
   controllers: [BillingController],
   // Lists the services

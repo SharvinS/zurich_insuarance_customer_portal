@@ -25,13 +25,35 @@ async function bootstrap() {
     .setVersion('1.0') // Set the API version
     // Configure Bearer token authentication for Swagger UI
     .addBearerAuth(
-      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'Authorization',
+        in: 'header',
+      },
       'Authorization',
     )
     .build(); // Build the configuration object
 
   // Create the Swagger document using the application instance and the config
   const document = SwaggerModule.createDocument(app, config);
+
+  document.paths = Object.fromEntries(
+    Object.entries(document.paths).map(([path, methods]) => {
+      Object.entries(methods).forEach(([_, operation]) => {
+        const op = operation as {
+          [key: string]: any;
+          security?: { [key: string]: any }[];
+        };
+        if (!op.security) {
+          op.security = [{ Authorization: [] }];
+        }
+        console.log(_);
+      });
+      return [path, methods];
+    }),
+  );
   // Set up the Swagger UI endpoint at '/api'
   SwaggerModule.setup('api', app, document);
 
