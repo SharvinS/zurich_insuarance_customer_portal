@@ -129,6 +129,16 @@ Follow these instructions to get the project running on your local machine for d
 *   npm
 *   Postgres Database with table name (Ensure sample data exists) as per requirements
 
+# Database Setup
+
+1.  **Set up a database Postgres.app:**
+    *   Install and open Postgres.app.
+    *   Create a schema 'CUSTOMER_BILLING_PORTAL' - CREATE DATABASE "CUSTOMER_BILLING_PORTAL";.
+    *   Open schema to run in terminal.
+    *   Run table creation script - database/billingRecordsCreation.sql.
+    *   Run seeder script - database/billingRecordsSeeder.sql.
+    *   Run 'SELECT * FROM "BILLING_RECORDS";' to verify database setup.
+
 # Backend Setup
 
 1.  **Navigate to the backend directory:**
@@ -139,7 +149,7 @@ Follow these instructions to get the project running on your local machine for d
 
 3.  **Set up environment variables:**
     *   Create a '.env' file in the backend directory.
-    *   Copy the contents of '.env.example' into '.env'.
+    *   Copy the contents of 'env.example' into '.env'.
     *   Fill in the necessary environment variables.
 
 4.  **Start the backend server:**
@@ -163,3 +173,4 @@ Follow these instructions to get the project running on your local machine for d
 4.  **Start the frontend development server:**
     'npm run start'
     *   The frontend development server should now be running (http://localhost:3001). Open it in your browser.
+    *   The package.json script has been configured to start the application on port 3001. No specific command required for it.
